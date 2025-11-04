@@ -1,5 +1,6 @@
 import React from 'react';
 import { Briefcase, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const roles = [
   {
@@ -39,7 +40,14 @@ const Experience = () => {
 
         <div className="grid gap-6">
           {roles.map((r, idx) => (
-            <div key={idx} className="rounded-xl border border-white/10 bg-white/5 p-6 text-slate-200 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur">
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="group rounded-xl border border-white/10 bg-white/5 p-6 text-slate-200 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur"
+            >
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <div>
                   <h3 className="text-lg font-semibold text-white">{r.title}</h3>
@@ -50,7 +58,8 @@ const Experience = () => {
               {r.links && (
                 <div className="mt-4 flex flex-wrap gap-3">
                   {r.links.map((l) => (
-                    <a
+                    <motion.a
+                      whileHover={{ y: -2 }}
                       key={l.href}
                       href={l.href}
                       target="_blank"
@@ -58,11 +67,11 @@ const Experience = () => {
                       className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10"
                     >
                       {l.label} <ExternalLink size={16} />
-                    </a>
+                    </motion.a>
                   ))}
                 </div>
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
