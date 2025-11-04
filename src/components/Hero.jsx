@@ -11,9 +11,10 @@ const fadeUp = {
 const Hero = () => {
   return (
     <section className="relative min-h-[80vh] w-full overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900">
+      {/* Interactive Spline scene (moves with mouse — no click needed) */}
       <div className="absolute inset-0">
         <Spline
-          scene="https://prod.spline.design/4cHQr84zOGAHOehh/scene.splinecode"
+          scene="https://prod.spline.design/GAomjSvthYZG1LLN/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />
       </div>
