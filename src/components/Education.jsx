@@ -1,58 +1,56 @@
 import React from 'react';
-import { GraduationCap } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const schools = [
-  {
-    title: 'Instituto Tecnico Salesiano Villada',
-    degree: 'Technical Degree in Programming',
-    details:
-      'Gained expertise in software development, teamwork, and problem-solving, while adapting to evolving technologies in professional settings.',
-  },
-  {
-    title: 'XAcademy - Technology with Purpose / Santex',
-    degree: 'Year-long Web Development Program',
-    details:
-      'Completed training focused on industry best practices and collaborative project development.',
-  },
-  {
-    title: "Instituto Universitario Aeronáutico",
-    degree: "Bachelor's Degree in Computer Engineering (Ongoing)",
-    details:
-      'Enhancing technical skills through advanced coursework on software development and system architecture.',
-  },
-];
+const card = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55 } },
+};
 
-const Education = () => {
+export default function Education() {
+  const items = [
+    {
+      title: 'B.Sc. in Computer Science',
+      org: 'University of Technology',
+      period: '2015 — 2019',
+      details: 'Focus on software engineering, HCI, and web technologies.',
+    },
+    {
+      title: 'Continuous Learning',
+      org: 'Workshops & Certifications',
+      period: 'Ongoing',
+      details: 'AI for web, 3D on the web, performance optimization.',
+    },
+  ];
+
   return (
-    <section id="education" className="relative bg-slate-900 py-16 md:py-24">
-      <div className="container mx-auto px-6">
-        <div className="mb-10 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-400/10">
-            <GraduationCap className="text-cyan-300" size={20} />
-          </div>
-          <h2 className="text-2xl font-bold text-white md:text-3xl">Education</h2>
-        </div>
+    <section id="education" className="relative z-10 mx-auto max-w-6xl px-6 py-20 text-white">
+      <motion.h2
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6 }}
+        className="text-2xl font-semibold tracking-tight md:text-3xl"
+      >
+        Education
+      </motion.h2>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {schools.map((s, i) => (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-xl border border-white/10 bg-white/5 p-6 text-slate-200 backdrop-blur"
-            >
-              <h3 className="text-lg font-semibold text-white">{s.title}</h3>
-              <p className="text-sm text-slate-400">{s.degree}</p>
-              <p className="mt-3 text-slate-200/90 leading-relaxed">{s.details}</p>
-            </motion.div>
-          ))}
-        </div>
+      <div className="mt-8 grid gap-6 md:grid-cols-2">
+        {items.map((it, i) => (
+          <motion.div
+            key={i}
+            variants={card}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="rounded-xl border border-white/10 bg-white/5 p-6"
+          >
+            <h3 className="text-lg font-medium">{it.title}</h3>
+            <p className="text-white/70">{it.org}</p>
+            <p className="text-sm text-white/60">{it.period}</p>
+            <p className="mt-3 text-white/80">{it.details}</p>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
-};
-
-export default Education;
+}

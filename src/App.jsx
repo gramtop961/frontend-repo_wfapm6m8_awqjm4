@@ -1,24 +1,22 @@
 import React from 'react';
-import Hero from './components/Hero';
-import Experience from './components/Experience';
-import Skills from './components/Skills';
-import Education from './components/Education';
+import Hero from './components/Hero.jsx';
+import Skills from './components/Skills.jsx';
+import Experience from './components/Experience.jsx';
+import Education from './components/Education.jsx';
 
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen w-full bg-black font-inter">
       <Hero />
-      <Experience />
       <Skills />
+      <Experience />
       <Education />
 
-      <footer className="border-t border-white/10 bg-slate-950/70">
-        <div className="container mx-auto px-6 py-10 text-center text-slate-400">
-          <p>© {new Date().getFullYear()} Bruno Cavazza — Web Developer</p>
-        </div>
+      <footer className="relative z-10 border-t border-white/10 bg-black/60 py-8 text-center text-white/60">
+        <p>
+          © {new Date().getFullYear()} Bruno Cavazza • Built with React, Tailwind, Framer Motion, and Spline
+        </p>
       </footer>
     </div>
   );
 }
-
-export default App;

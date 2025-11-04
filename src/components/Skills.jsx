@@ -1,89 +1,81 @@
 import React from 'react';
-import { Code, Check, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const categories = [
-  {
-    title: 'Frontend Development',
-    items: ['React', 'Angular', 'Vue', 'Node.js'],
-  },
-  {
-    title: 'Web Technologies',
-    items: ['HTML5', 'CSS', 'JavaScript'],
-  },
-  {
-    title: 'Version Control',
-    items: ['GitHub'],
-  },
-  {
-    title: 'UI/UX Design',
-    items: ['Figma'],
-  },
-  {
-    title: 'Database',
-    items: ['SQL'],
-  },
-  {
-    title: 'Methodologies',
-    items: ['Scrum', 'Project collaboration'],
-  },
-  {
-    title: 'Soft Skills',
-    items: ['Problem solving', 'Teamwork', 'Communication', 'English B2'],
-  },
-  {
-    title: 'Other',
-    items: ['Computer maintenance & repair'],
-  },
-];
-
 const container = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08 }
-  }
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
 };
 
 const item = {
   hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const Skills = () => {
-  return (
-    <section id="skills" className="relative bg-slate-950 py-16 md:py-24">
-      <div className="container mx-auto px-6">
-        <div className="mb-10 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-400/10">
-            <Code className="text-cyan-300" size={20} />
-          </div>
-          <h2 className="text-2xl font-bold text-white md:text-3xl">Skills</h2>
-        </div>
+const Pill = ({ children }) => (
+  <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/90">
+    {children}
+  </span>
+);
 
-        <motion.div variants={container} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="grid gap-6 md:grid-cols-2">
-          {categories.map((cat) => (
-            <motion.div key={cat.title} variants={item} className="group rounded-xl border border-white/10 bg-gradient-to-b from-white/5 to-white/0 p-6 text-slate-200 backdrop-blur transition-colors hover:border-cyan-300/30">
-              <div className="mb-3 flex items-center gap-2">
-                <Sparkles size={18} className="text-cyan-300 transition-transform group-hover:rotate-12" />
-                <h3 className="text-lg font-semibold text-white">{cat.title}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {cat.items.map((it) => (
-                  <motion.span
-                    key={it}
-                    whileHover={{ y: -2 }}
-                    className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-sm"
-                  >
-                    <Check size={14} className="text-cyan-300" /> {it}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
+export default function Skills() {
+  return (
+    <section id="skills" className="relative z-10 mx-auto max-w-6xl px-6 py-20 text-white">
+      <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={container}>
+        <motion.h2 variants={item} className="text-2xl font-semibold tracking-tight md:text-3xl">
+          Skills & Tools
+        </motion.h2>
+        <motion.p variants={item} className="mt-2 max-w-2xl text-white/70">
+          A focused toolkit for building fast, interactive, and accessible web experiences.
+        </motion.p>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <motion.div variants={item} className="rounded-xl border border-white/10 bg-white/5 p-6">
+            <h3 className="text-lg font-medium">Frontend Development</h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Pill>React</Pill>
+              <Pill>Angular</Pill>
+              <Pill>Vue</Pill>
+              <Pill>Node.js</Pill>
+              <Pill>TypeScript</Pill>
+              <Pill>Tailwind CSS</Pill>
+              <Pill>Framer Motion</Pill>
+            </div>
+          </motion.div>
+
+          <motion.div variants={item} className="rounded-xl border border-white/10 bg-white/5 p-6">
+            <h3 className="text-lg font-medium">Backend & Cloud</h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Pill>Express</Pill>
+              <Pill>FastAPI</Pill>
+              <Pill>MongoDB</Pill>
+              <Pill>PostgreSQL</Pill>
+              <Pill>Docker</Pill>
+              <Pill>Vercel</Pill>
+            </div>
+          </motion.div>
+
+          <motion.div variants={item} className="rounded-xl border border-white/10 bg-white/5 p-6">
+            <h3 className="text-lg font-medium">AI & Data</h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Pill>OpenAI</Pill>
+              <Pill>LangChain</Pill>
+              <Pill>Python</Pill>
+              <Pill>Vector DBs</Pill>
+              <Pill>LLM Integrations</Pill>
+            </div>
+          </motion.div>
+
+          <motion.div variants={item} className="rounded-xl border border-white/10 bg-white/5 p-6">
+            <h3 className="text-lg font-medium">Testing & Quality</h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Pill>Jest</Pill>
+              <Pill>React Testing Library</Pill>
+              <Pill>ESLint</Pill>
+              <Pill>Playwright</Pill>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
     </section>
   );
-};
-
-export default Skills;
+}
